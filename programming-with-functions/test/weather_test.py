@@ -1,5 +1,5 @@
-# from weather import cels_from_far
-# from pytest import approx
+from weather import cels_from_fahr
+from pytest import approx
 import pytest
 
 

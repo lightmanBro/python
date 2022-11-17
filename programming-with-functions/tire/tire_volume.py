@@ -26,7 +26,7 @@ dt = f"{current_date_and_time:%Y-%m-%d}"
 print(f' {dt}, {w}, {a}, {d},  {result:.2f}')
 
 
-with open('C:/Users/user/Desktop/python/programming-with-functions/tire/volume.txt', 'at') as volume:
+with open('programming-with-functions\tire\volume.txt', 'at') as volume:
           print(f' {dt}, {w}, {a}, {d},  {result:.2f}', file=volume)
 
 tire_price = 0

@@ -1,8 +1,6 @@
-from sentences import *
 import random
 import pytest
-from pytest import approx
-
+from sentences import get_determiner
 
 def test_get_determiner():
     # 1. Test the single determiners.
@@ -17,7 +15,7 @@ def test_get_determiner():
 
         # Call the get_determiner function which
         # should return a single determiner.
-        word = get_determiner(1)
+        word = get_determiner(2)
 
         # Verify that the word returned from get_determiner
         # is one of the words in the single_determiners list.
@@ -25,15 +23,15 @@ def test_get_determiner():
 
     # 2. Test the plural determiners.
 
-    # plural_determiners = ["some", "many", "the"]
+    plural_determiners = ["some", "many", "the"]
 
-    # # This loop will repeat the statements inside it 4 times.
-    # for _ in range(4):
+    # This loop will repeat the statements inside it 4 times.
+    for _ in range(4):
 
-    #     # Call the get_determiner function which
-    #     # should return a plural determiner.
-    #     word = get_determiner(2)
+        # Call the get_determiner function which
+        # should return a plural determiner.
+        word = get_determiner(1)
 
-    #     # Verify that the word returned from get_determiner
-    #     # is one of the words in the plural_determiners list.
-    #     assert word in plural_determiners
+        # Verify that the word returned from get_determiner
+        # is one of the words in the plural_determiners list.
+        assert word in plural_determiners

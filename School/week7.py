@@ -35,6 +35,6 @@ while trials <= 2:
                                         print(f'Your hint is _ _ _ _ _ {guess[5].lower()}\n')
           print(' guess is correct '.upper() + guessWord.upper() )
 print(f' you have used {trials} out of your guess chances')
-trials = trials + 1
+trials += 1
 if trials == 3:
           exit()

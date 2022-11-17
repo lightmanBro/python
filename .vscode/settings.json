@@ -3,5 +3,14 @@
           "editor.codeActionsOnSave": {
           
           },
-          "python.formatting.provider": "autopep8"
+        "python.formatting.provider": "yapf",
+        "python.testing.unittestArgs": [
+            "-v",
+            "-s",
+            "./programming-with-functions",
+            "-p",
+            "test_*.py"
+        ],
+        "python.testing.pytestEnabled": false,
+        "python.testing.unittestEnabled": true
 }
