@@ -7,7 +7,7 @@ def main():
     userInpt = int(input('Enter Student ID: '))
 
 
-    with open('students.csv','rt') as students:
+    with open('programming-with-functions\students\students.csv','rt') as students:
         reader = csv.reader(students)
         next(reader)
         for student in reader:
@@ -20,8 +20,9 @@ def main():
     for key, value in studentsLog.items():
         if userInpt == key:
             print(f'The student with the id {userInpt} is {value}')
-        # else:
-        #     print('User not found')
+            print(len(userInpt))
+        else:
+            print('User not found')
 
 
 
