@@ -97,10 +97,11 @@ with open(req_file, 'rt') as request:
                 print("You entered an invalid Key for the line number.")
                 print("Run the program again and enter an integer for" \
                         " the line number.")
-                        
+
             except FileNotFoundError as not_found:
                 print(type(not_found).__name__, not_found, sep=': ')
-
+                print("Run the program again and enter an integer for" \
+                        " the line number.")
             return sales_tax_amount, sub_total
 
 
