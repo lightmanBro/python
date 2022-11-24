@@ -66,13 +66,12 @@ def main():
             print(f"There are only {length} lines in {filename}.")
         print(f"Run the program again and enter a line number" \
                 f" between 1 and {length}.")
-
     except Exception as excep:
         # This code will be executed if some
         # other type of exception occurs.
         print()
         print(type(excep).__name__, excep, sep=": ")
-
+        print(linenum)
 
 def read_list(filename):
     """Read the contents of a text file into a list

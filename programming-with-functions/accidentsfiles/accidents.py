@@ -1,252 +1,125 @@
-# Import the csv module so that it can be used
-# to read from the accidents.csv file.
 import csv
+from datetime import datetime
+current_date_and_time = datetime.now()
+product_name = 0
+product_quantity = 1
+product_price = 2
+sum = 0
+sub_total = 0
+price_of_item = 0
+sales_tax_amount = 0
+prdtcs = 'programming-with-functions\products\products.csv'
+# userInpt = input('Enter item ID')
+# user_quantity = int(input('Enter Quantity'))
+req_file = 'programming-with-functions/products/request.csv'
+print('Shop-Rite Supermarket')
+
+with open(req_file, 'rt') as request:
+    next_read = csv.reader(request)
+    next(next_read)
+
+    # initialized an empty array to store the items inside next_read after the loop
+    req = []
+    # looping through the items inside the next_read csv file
+    for user_req in next_read:
+        
+        req.append(user_req)
+    # print(req)
 
 
-# Column numbers from the accidents.csv file.
-YEAR_COLUMN = 0
-FATALITIES_COLUMN = 1
-INJURIES_COLUMN = 2
-CRASHES_COLUMN = 3
-FATAL_CRASHES_COLUMN = 4
-DISTRACT_COLUMN = 5
-PHONE_COLUMN = 6
-SPEED_COLUMN = 7
-DUI_COLUMN = 8
-FATIGUE_COLUMN = 9
+    # looping through the items inside the req array and assigning each items by index number to variables
+    for keys in req:
+        item_key = keys[0]
+        item_count = keys[1]
+        
+        # summing up the total number of each goods 
+        for numb in item_count:
+            sum += int(numb)
 
 
-def main():
-    # Prompt the user for a filename and open that text file.
-    try:
-        filename = input("Name of file that contains NHTSA data: ")
-        with open(filename, "rt") as text_file:
 
-            # Prompt the user for a percentage.
-            perc_reduc = float(input(
-                "Percent reduction of texting while driving [0, 100]: "))
-
-            print()
-            print(f"With a {perc_reduc}% reduction in using a cell",
-                "phone while driving, approximately this",
-                "number of injuries and deaths would have",
-                "been prevented in the USA.", sep="\n")
-            print()
-            print("Year, Injuries, Deaths")
-
-            # Use the csv module to create a reader
-            # object that will read from the opened file.
-            reader = csv.reader(text_file)
-    
-            # The first line of the CSV file contains column headings
-            # and not a student's I-Number and name, so this statement
-            # skips the first line of the CSV file.
-            next(reader)
-
-            # Process each row in the CSV file.
-            for row in reader:
-                year = row[YEAR_COLUMN]
-
-                # Call the estimate_reduction function.
-                injur, fatal = estimate_reduction(
-                        row, PHONE_COLUMN, perc_reduc)
-
-                # Print the estimated reductions
-                # in injuries and fatalities.
-                print(year, injur, fatal, sep=", ")
-
-    except FileNotFoundError as not_found_error:
-        print()
-        print(type(not_found_error).__name__, not_found_error, sep=': ')
-        print(f"The file {filename} doesn't exist.")
-        print("Run the program again and enter the" \
-                    " name of an existing file.")
-
+        # Creating a function that 
+        def read_dict(filename, key_column_index):
+            sales_tax_amount = 0
+            try:
+                with open(filename, 'rt') as products:
+                    reader = csv.reader(products)
+                    # The first line of the CSV file contains
+                    # headings and not fuel usage data, so this
+                    # statement skips the first line of the file.
+                    next(reader)
                     
-    except PermissionError as perm_error:
-        print()
-        print(type(perm_error).__name__, perm_error, sep=': ')
-        print(f'you have no permission to read {filename}')
-        print("Run the program again and enter the name" \
-                " of a file that you are allowed to read.")
+                    # Storing the items inside the csv file as a dictionary of key and value pair
+                    items = {}
+                    sub_total = 0
 
-    except ValueError as value_err:
-        print()
-        print(type(value_err).__name__, value_err, sep=': ')
-        print('you have enterd an invalid integer for the line number')
-        print("Run the program again and enter the name" \
-                " of a file that you are allowed to read.")
-    
-    def estimate_reduction(row, behavior_key, perc_reduc):
-        """Estimate and return the number of injuries and deaths that
-        would not have occurred on U.S. roads and highways if drivers
-        had reduced a dangerous behavior by a given percentage.
+                    # looping through the items inside the csv files and turning them into key:value pairs and assigning them to variables.
+                    for lines in reader:
+                        key = lines[product_name]
+                        item_quantity = lines[1]
 
-        Parameters
-            row: a CSV row of data from the U.S. National Highway Traffic
-                Safety Administration (NHTSA)
-            behavior_key: heading from the CSV file for the dangerous
-                behavior that drivers could reduce
-            perc_reduc: percent that drivers could reduce a dangerous
-                behavior
-        Return: The number of injuries and deaths that may have been
-            prevented
-        """
-        behavior = int(row[behavior_key])
-        fatal_crashes = int(row[FATAL_CRASHES_COLUMN])
-        ratio = perc_reduc / 100 * behavior / fatal_crashes
+                        # looping through the prices of items and summing it up to get the subtotal
+                        price_of_item = lines[2]
+                        sub_total += float(price_of_item)
 
-        fatalities = int(row[FATALITIES_COLUMN])
-        injuries = int(row[INJURIES_COLUMN])
+                        #  getting the sales tax amount
+                        sales_tax_amount = sub_total/100 * 6
+                        # Turning the product name into a key and the 2 values into a list to store them as a dictionary inside the items{}.
+                        items[key] = [item_quantity, price_of_item]
 
-        reduc_fatal = int(round(fatalities * ratio, 0))
-        reduc_injur = int(round(injuries * ratio, 0))
-        return reduc_injur, reduc_fatal
+                    # looping through the items inside the dictionary and assigning key value to each of them.
+                    for item in items.items():
+                        key = item[product_name]
+
+                        # checking to see if the keys enterd by the user is thesame as any of the keys inside the dictionary and printing it out as an array
+                        if key == key_column_index:
+                            # looping through the values of the keys which is an array and assigning the values to variables
+                            for goods in item:
+                                description = goods[0]
+                                price = goods[1]
 
 
-# If this file was executed like this:
-# > python accidents.py
-# then call the main function. However, if this file
-# was simply imported, then skip the call to main.
-if __name__ == "__main__":
-    main()
+                            print(f'{description}: {item_count} @ ${price} total ')
+            except PermissionError as perm_err:
+            # This code will be executed if the user enters the name
+            # of a file and doesn't have permission to read that file.
+                print()
+                print(type(perm_err).__name__, perm_err, sep=": ")
+                print(f"You don't have permission to read {filename}.")
+                print("Run the program again and enter the name" \
+                        " of a file that you are allowed to read.")
+
+            except KeyError as key_err:
+                # This code will be executed if the user enters
+                # an invalid integer for the line number.
+                print()
+                print(type(key_err).__name__, key_err, sep=": ")
+                print("You entered an invalid Key for the line number.")
+                print("Run the program again and enter an integer for" \
+                        " the line number.")
+                        
+            except FileNotFoundError as not_found:
+                print(type(not_found).__name__, not_found, sep=': ')
+
+            return sales_tax_amount, sub_total
 
 
-# Copyright 2020, Brigham Young University-Idaho. All rights reserved.
-
-# Import the csv module so that it can be used
-# to read from the accidents.csv file.
-import csv
+        sales_tax, sub_total = read_dict(prdtcs, item_key)
 
 
-# Column numbers from the accidents.csv file.
-YEAR_COLUMN = 0
-FATALITIES_COLUMN = 1
-INJURIES_COLUMN = 2
-CRASHES_COLUMN = 3
-FATAL_CRASHES_COLUMN = 4
-DISTRACT_COLUMN = 5
-PHONE_COLUMN = 6
-SPEED_COLUMN = 7
-DUI_COLUMN = 8
-FATIGUE_COLUMN = 9
+    print(f'Date: {current_date_and_time:%A %I :%M %p}')
+    print(f'The number of items in your cart is {sum}')
+    print(f'The 6% sales tax is {sales_tax}')
+    print(f'The total amount due is {sales_tax_amount + sub_total}')      
+    print(f'Total payable amount is {sales_tax + sub_total}')
+    print('Thank you for shopping in our store')
 
-
-def main():
-    try:
-        # Prompt the user for a filename and open that text file.
-        filename = input("Name of file that contains NHTSA data: ")
-        with open(filename, "rt") as infile:
-
-            # Get a percentage from the user.
-            perc_reduc = get_float("Percent reduction of texting"
-                " while driving [0, 100]: ", 0, 100)
-
-            print()
-            print(f"With a {perc_reduc}% reduction in using a cell",
-                "phone while driving, approximately this",
-                "number of injuries and deaths would have",
-                "been prevented in the USA.", sep="\n")
-            print()
-            print("Year, Injuries, Deaths")
-
-            # Use the csv module to create a reader
-            # object that will read from the opened file.
-            reader = csv.reader(infile)
-
-            # The first line of the CSV file contains column
-            # headings and not a student's I-Number and name, so
-            # this statement skips the first line of the CSV file.
-            next(reader)
-
-            # Process each row in the CSV file.
-            for row in reader:
-                year = row[YEAR_COLUMN]
-
-                # Call the estimate_reduction function.
-                injur, fatal = estimate_reduction(
-                        row, PHONE_COLUMN, perc_reduc)
-
-                # Print the estimated reductions
-                # in injuries and fatalities.
-                print(year, injur, fatal, sep=", ")
-
-    except (FileNotFoundError, PermissionError) as error:
-        print(error)
-        print("Please choose a different file.")
-
-    except ValueError as val_err:
-        print("Error:", val_err)
-
-    except (csv.Error, KeyError) as error:
-        print(f"Error: line {reader.line_num} of {infile.name}"
-                " is formatted incorrectly.")
-
-    except ZeroDivisionError as zero_div_err:
-        print(f"Error: line {reader.line_num} of {infile.name}"
-                " contains 0 in the 'Fatal Crashes' or"
-                "'Cell Phone Use' column.")
-
-
-def get_float(prompt, lower_bound, upper_bound):
-    """Prompt the user for a number and return the number as a float.
-
-    Parameters
-        prompt: A string to display to the user.
-        lower_bound: The lowest (smallest) number
-            that the user may enter.
-        upper_bound: The highest (largest) number
-            that the user may enter.
-    Return: The number that the user entered.
-    """
-    number = None
-    while number == None:
-        try:
-            number = float(input(prompt))
-            if number < lower_bound:
-                print(f"Error: {number} is too low." \
-                        f" Please enter a different number.")
-                number = None
-            elif number > upper_bound:
-                print(f"Error: {number} is too high." \
-                        f" Please enter a different number.")
-                number = None
-        except ValueError as val_err:
-            print("Error:", val_err)
-    print()
-    return number
-
-
-def estimate_reduction(row, behavior_key, perc_reduc):
-    """Estimate and return the number of injuries and deaths that
-    would not have occurred on U.S. roads and highways if drivers
-    had reduced a dangerous behavior by a given percentage.
-
-    Parameters
-        row: a CSV row of data from the U.S. National Highway
-            Traffic Safety Administration (NHTSA)
-        behavior_key: heading from the CSV file for the dangerous
-            behavior that drivers could reduce
-        perc_reduc: percent that drivers could reduce a dangerous
-            behavior
-    Return: The number of injuries and deaths that may have been
-        prevented
-    """
-    behavior = int(row[behavior_key])
-    fatal_crashes = int(row[FATAL_CRASHES_COLUMN])
-    ratio = perc_reduc / 100 * behavior / fatal_crashes
-
-    fatalities = int(row[FATALITIES_COLUMN])
-    injuries = int(row[INJURIES_COLUMN])
-
-    reduc_fatal = int(round(fatalities * ratio, 0))
-    reduc_injur = int(round(injuries * ratio, 0))
-    return reduc_injur, reduc_fatal
-
-
-# If this file was executed like this:
-# > python teach_solution.py
-# then call the main function. However, if this file
-# was simply imported, then skip the call to main.
-if __name__ == "__main__":
-    main()
+with open('programming-with-functions/accidentsfiles/receipt.txt', 'at') as receipt:
+    print(f'Date: {current_date_and_time:%A %I :%M %p}\n'
+        f'The number of items in your cart is {sum}\n'
+        f'The 6% sales tax is {sales_tax}\n'
+        f'The total amount due is {sales_tax_amount + sub_total}\n', file=receipt)
+#         # clean = lines.strip()
+#         # product.append(lines)
+#         # print(price_of_item)
+# # print(inpt)
