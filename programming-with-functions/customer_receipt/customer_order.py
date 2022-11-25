@@ -7,9 +7,10 @@ product_price = 2
 sub_total = 0
 price_of_item = 0
 sales_tax_amount = 0
-prdtcs = 'programming-with-functions\products\products.csv'
-# userInpt = input('Enter item ID')
-# user_quantity = int(input('Enter Quantity'))
+
+
+prdtcs = 'programming-with-functions/products/products.csv' 
+
 req_file = 'programming-with-functions/products/request.csv'
 print('Shop-Rite Supermarket')
 def main():
@@ -116,7 +117,7 @@ def main():
         print(f'Total payable amount is {sales_tax + sub_total}')
         print('Thank you for shopping in our store')
 
-        with open('programming-with-functions/accidentsfiles/receipt.txt', 'at') as receipt:
+        with open('programming-with-functions/customer_receipt/receipt.txt', 'at') as receipt:
             print(f'Date: {current_date_and_time:%A %I :%M %p}\n'
                 f'The number of items in your cart is {sum}\n'
                 f'The 6% sales tax is {sales_tax}\n'
