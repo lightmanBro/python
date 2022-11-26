@@ -13,3 +13,18 @@ The number of items in your cart is 12
 The 6% sales tax is 2.4558
 The total amount due is 40.93
 
+Date: Friday 11 :41 PM
+The number of items in your cart is 12
+The 6% sales tax is 2.4558
+The total amount due is 40.93
+
+Date: Saturday 07 :16 PM
+The number of items in your cart is 12
+The 6% sales tax is 2.4558
+The total amount due is 40.93
+
+Date: Saturday 08 :52 PM
+The number of items in your cart is 12
+The 6% sales tax is 2.4558
+The total amount due is 40.93
+

@@ -201,7 +201,7 @@ def make_periodic_table():
     # print(obj)
 
 
-    return periodic_table_dict
+    return list(periodic_table_dict)
 
 def make_molecules_dict():
     known_molecules_dict = {
