@@ -1,7 +1,8 @@
 # Copyright 2020, Brigham Young University-Idaho. All rights reserved.
-
+from tkinter import *
 import tkinter as tk
 import number_entry as nent
+
 
 
 def main():
@@ -50,11 +51,10 @@ def populate_main_window(frm_main):
     lbl_age = tk.Label(frm_main, text="Age:")
 
     # Create a integer entry box where the user will enter her age.
-    ent_age = nent.IntEntry(frm_main, 12, 90, width=5)
+    ent_age = nent.IntEntry(frm_main, 12, 90, width=3)
 
     # Create a label that displays "Rates:"
     lbl_rates = tk.Label(frm_main, text="Rates:")
-
     # Create labels that will display the results.
     lbl_slow = tk.Label(frm_main, width=4)
     lbl_fast = tk.Label(frm_main, width=4)
@@ -68,7 +68,7 @@ def populate_main_window(frm_main):
     lbl_rates.grid(row=0, column=2, padx=(30,3), pady=3)
     lbl_slow.grid( row=0, column=3, padx=3, pady=3)
     lbl_fast.grid( row=0, column=4, padx=3, pady=3)
-    btn_clear.grid(row=1, column=0, padx=3, pady=3, columnspan=5, sticky="w")
+    btn_clear.grid(row=2, column=0, padx=5, pady=5, columnspan=5, sticky="w")
 
 
     # This function will be called each time the user releases a key.
