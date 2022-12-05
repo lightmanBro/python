@@ -12,7 +12,7 @@ def main():
     # a window is also called a frame.
     frm_main = tk.Frame(root)
     frm_main.master.title("Heart Rate")
-    frm_main.pack(padx=4, pady=3, fill=tk.BOTH, expand=1)
+    frm_main.pack(padx=8, pady=3, fill=tk.BOTH, expand=1)
 
     # Call the populate_main_window function, which will add
     # labels, text entry boxes, and buttons to the main window.
